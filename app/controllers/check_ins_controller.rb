@@ -1,4 +1,10 @@
 class CheckInsController < ApplicationController
+    
+    def index
+        check_ins = CheckIn.all 
+        render json: check_ins, include: :user
+    end
+    
     def create
         check_in = CheckIn.new(check_in_params)  
         

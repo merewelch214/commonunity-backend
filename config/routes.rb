@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  
-  post '/posts' to: 'posts#create'
-  get '/posts' to: 'posts#index'
+
+  resources :posts
+  resources :check_ins
 
   mount ActionCable.server, at: '/cable'
 end

@@ -1,7 +1,17 @@
 class PostsController < ApplicationController
     def create
         post = Post.new(post_params)
-        render json: post
+        if post.save
+            render json: post
+        else 
+            render json: {errors: post.errors.full_messages}
+        end
+
+    end
+
+    def index
+        posts = Post.all 
+        render json: posts
     end
 
     private
