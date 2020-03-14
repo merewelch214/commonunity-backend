@@ -1,13 +1,21 @@
 class CheckInsController < ApplicationController
     
     def index
-        check_ins = CheckIn.all 
+        check_ins = CheckIn.all.order(updated_at: :desc).to_a.uniq(&:user_id)
         render json: check_ins, include: :user
     end
     
+    def show
+        check_in = CheckIn.find_by(user_id: params[:user_id], checked_in_at: nil)
+        if check_in 
+            render json: check_in
+        else 
+            render json: {errors: 'not checked in'}
+        end
+    end
+    
     def create
-        check_in = CheckIn.new(check_in_params)  
-        
+        check_in = CheckIn.new(location: params[:location], user_id: params[:user_id])  
         if check_in.save
             render json: check_in
         else 
@@ -16,14 +24,14 @@ class CheckInsController < ApplicationController
     end
 
     def update
-        check_in = CheckIn.find(params[:id])
-        check_in.update(check_in_params)
+        check_in = CheckIn.find_by(user_id: params[:user_id], checked_in_at: nil)
+        check_in.update(checked_in_at: DateTime.now())
         render json: check_in
     end
 
     private 
     
     def check_in_params
-        params.require(:check_in).permit(:user_id, :location, :location_text)
+        params.require(:check_in).permit(:user_id, :location, :location_text, :checked_in_at)
     end
 end
