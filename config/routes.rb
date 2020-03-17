@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get '/check_ins_by_user_id/:user_id', to: 'check_ins#show'
   post '/signup', to: 'users#create'
   post '/login', to: 'users#login'
+  post '/safety_concern', to: 'safety_concerns#create'
 
   mount ActionCable.server, at: '/cable'
 end
