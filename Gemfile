@@ -40,4 +40,7 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'active_model_serializers', '~> 0.10.0'
+# gem 'active_model_serializers', '~> 0.10.0'
+
+gem 'fast_jsonapi'
+# gem 'actionview', '>= 6.0.2.2'

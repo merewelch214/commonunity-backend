@@ -17,7 +17,8 @@ class CheckInsController < ApplicationController
     def create
         check_in = CheckIn.new(location: params[:location], user_id: params[:user_id])  
         if check_in.save
-            render json: check_in
+            ActionCable.server.broadcast("team_channel", check_in: CheckInSerializer.new(check_in))
+            render json: check_in, include: :user
         else 
             render json: {errors: check_in.errors.full_messages}
         end
@@ -25,8 +26,10 @@ class CheckInsController < ApplicationController
 
     def update
         check_in = CheckIn.find_by(user_id: params[:user_id], checked_in_at: nil)
+        user = User.find(params[:user_id])
         check_in.update(checked_in_at: DateTime.now())
-        render json: check_in
+        ActionCable.server.broadcast("team_channel", check_in: CheckInSerializer.new(check_in))
+        render json: check_in, include: :user
     end
 
     private 
