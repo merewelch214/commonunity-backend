@@ -1,5 +1,4 @@
 class CheckInsController < ApplicationController
-    
     def index
         check_ins = CheckIn.all.order(updated_at: :desc).to_a.uniq(&:user_id)
         render json: check_ins, include: :user
