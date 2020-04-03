@@ -16,7 +16,7 @@ class CheckInsController < ApplicationController
 
     def update
         check_in = CheckIn.find_by(user_id: params[:user_id], checked_in_at: nil)
-        user = User.find(params[:user_id])
+        # user = User.find(params[:user_id])
         check_in.update(checked_in_at: DateTime.now())
         ActionCable.server.broadcast("team_channel", check_in: CheckInSerializer.new(check_in))
         render json: check_in, include: :user

@@ -23,8 +23,6 @@ Rails.application.routes.draw do
   resources 'posts' do
     resources 'comments', only: [:index, :create, :destroy]
   end
-  
-
 
   mount ActionCable.server, at: '/cable'
 end
