@@ -24,12 +24,12 @@ class SafetyConcernsController < ApplicationController
         end
     end
 
-    def show
+    def latest_concern
         safety_concern = SafetyConcern.find_by(user_id: params[:user_id], resolved_at: nil)
         if safety_concern
             render json: safety_concern, include: :user
         else
-            render json: {errors: 'Safety concern not found'}
+            render json: {errors: 'No current safety concern'}
         end
     end
 
