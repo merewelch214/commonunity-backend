@@ -7,8 +7,8 @@ class CommentsController < ApplicationController
     end
     
     def show 
-        comment = Comment.find(id: params[:id])
-        render json: comment
+        comment = Comment.find(params[:id])
+        render json: comment, include: :user
     end
 
     def index

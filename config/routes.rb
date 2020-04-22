@@ -25,5 +25,7 @@ Rails.application.routes.draw do
     resources 'comments', only: [:index, :create, :destroy]
   end
 
+  get '/comments/:id', to: 'comments#show'
+
   mount ActionCable.server, at: '/cable'
 end
