@@ -33,6 +33,11 @@ class SafetyConcernsController < ApplicationController
         end
     end
 
+    def any_concern
+        count = SafetyConcern.all.where(resolved_at: nil).length
+        render json: count
+    end
+
 
     private
     def safety_concern_params

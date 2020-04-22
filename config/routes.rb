@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   post '/safety_concern', to: 'safety_concerns#create'
   get '/safety_concerns', to: 'safety_concerns#index'
+  get '/any_safety_concern', to: 'safety_concerns#any_concern'
   patch '/safety_concerns/:id', to: 'safety_concerns#update'
   get '/users/:user_id/safety_concerns', to: 'safety_concerns#latest_concern'
 
